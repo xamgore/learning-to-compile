@@ -4,7 +4,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
-fun doJob(step: Int, task: Int, scanner: (String) -> (CharSequence)) {
+fun doJob(step: Int, task: Any, scanner: (String) -> (CharSequence)) {
     val parsed = Files
             .lines(path("Step$step/Task$task/in.txt"))
             .map(scanner)
