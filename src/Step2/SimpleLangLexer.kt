@@ -6,7 +6,8 @@ import java.nio.file.Paths
 
 
 enum class Type {
-    EOF, ID, INT, COLON, SEMICOLON, ASSIGN, BEGIN, END, CYCLE
+    EOF, ID, INT, COLON, SEMICOLON, ASSIGN, BEGIN, END, CYCLE,
+    BINARY_OP, UNARY_OP, COMMA, LOGIC, SKIP
 }
 
 data class Token(val type: Type, val value: Any = "") {
@@ -21,7 +22,12 @@ class SimpleLangLexer(val fileName: String) {
     val keywords = mapOf(
             Pair("begin", Token(Type.BEGIN)),
             Pair("end", Token(Type.END)),
-            Pair("cycle", Token(Type.CYCLE))
+            Pair("cycle", Token(Type.CYCLE)),
+            Pair("div", Token(Type.BINARY_OP, "div")),
+            Pair("mod", Token(Type.BINARY_OP, "mod")),
+            Pair("and", Token(Type.BINARY_OP, "and")),
+            Pair("or", Token(Type.BINARY_OP, "or")),
+            Pair("not", Token(Type.UNARY_OP, "not"))
     )
 
     var row = 0L
@@ -78,6 +84,60 @@ class SimpleLangLexer(val fileName: String) {
 
                 ch = nextChar()
                 return Token(Type.ASSIGN)
+            }
+
+            ',' -> {
+                ch = nextChar()
+                return Token(Type.COMMA)
+            }
+
+            '{' -> {
+                do ch = nextChar() while (ch != '}' && ch != EOF)
+
+                if (ch == EOF)
+                    lexError("Multi-line comment was not closed")
+
+                ch = nextChar()
+                return Token(Type.SKIP)
+            }
+
+            in listOf('+', '-', '*', '/') -> {
+                val sign = ch; ch = nextChar()
+
+                if (ch == '=') {
+                    ch = nextChar()
+                    return Token(Type.BINARY_OP, "$sign=")
+                }
+
+                // comment
+                if (ch == '/') {
+                    do ch = nextChar() while (ch != '\n')
+                    return Token(Type.SKIP)
+                }
+
+                return Token(Type.BINARY_OP, sign)
+            }
+
+            in listOf('>', '<', '=') -> {
+                if (ch == '=') {
+                    ch = nextChar()
+                    return Token(Type.LOGIC, '=')
+                }
+
+                val op = ch; ch = nextChar()
+
+                if ((op == '>' || op == '<') && ch == '=') {
+                    ch = nextChar()
+                    return Token(Type.LOGIC, "$op=")
+                }
+
+                if (op == '<' && ch == '>') {
+                    ch = nextChar()
+                    return Token(Type.LOGIC, "<>")
+                }
+
+                // < или >
+                return Token(Type.LOGIC, op)
             }
 
             in 'a'..'z' -> {
