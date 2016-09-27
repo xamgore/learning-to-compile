@@ -1,0 +1,8 @@
+begin
+  a := 2;
+  cycle a
+  begin
+    b := a;
+    c := 234
+  end
+end
