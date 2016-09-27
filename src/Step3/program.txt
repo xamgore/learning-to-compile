@@ -4,5 +4,11 @@ begin
   begin
     b := a;
     c := 234
-  end
+  end;
+
+  for a := 1 to 5 do
+    while 1 do
+      begin
+        test := 2
+      end
 end

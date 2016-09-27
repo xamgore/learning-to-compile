@@ -6,7 +6,8 @@ import java.nio.file.Paths
 
 
 enum class Type {
-    EOF, ID, INT, COLON, SEMICOLON, ASSIGN, BEGIN, END, CYCLE
+    EOF, ID, INT, COLON, SEMICOLON, ASSIGN, BEGIN, END, CYCLE,
+    WHILE, FOR, DO, TO, IF, THEN, ELSE
 }
 
 data class Token(val type: Type, val value: Any = "") {
@@ -20,7 +21,14 @@ class SimpleLangLexer(val fileName: String) {
     val keywords = mapOf(
             Pair("begin", Token(Type.BEGIN)),
             Pair("end", Token(Type.END)),
-            Pair("cycle", Token(Type.CYCLE))
+            Pair("cycle", Token(Type.CYCLE)),
+            Pair("while", Token(Type.WHILE)),
+            Pair("for", Token(Type.FOR)),
+            Pair("do", Token(Type.DO)),
+            Pair("to", Token(Type.TO)),
+            Pair("if", Token(Type.IF)),
+            Pair("then", Token(Type.THEN)),
+            Pair("else", Token(Type.ELSE))
     )
 
     var row = 0L

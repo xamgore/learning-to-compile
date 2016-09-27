@@ -34,8 +34,28 @@ class SimpleLangParser(val lex: SimpleLangLexer) {
                 cycle()
             Type.ID ->
                 assign()
+            Type.WHILE ->
+                `while`()
+            Type.FOR ->
+                `for`()
             else -> syntaxError("Operator expected")
         }
+    }
+
+    fun `while`() {
+        matchOrDie(Type.WHILE)
+        expression()
+        matchOrDie(Type.DO, "DO expected")
+        statement()
+    }
+
+    fun `for`() {
+        matchOrDie(Type.FOR)
+        assign()
+        matchOrDie(Type.TO, "TO expected")
+        expression()
+        matchOrDie(Type.DO, "DO DO DO")
+        statement()
     }
 
     fun cycle() {
