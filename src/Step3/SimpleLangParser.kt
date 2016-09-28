@@ -15,9 +15,9 @@ class SimpleLangParser(val lex: SimpleLangLexer) {
     }
 
     fun block() {
-        matchOrDie(Type.BEGIN, "Begin keyword expected")
+        matchOrDie(Type.BEGIN)
         statementList()
-        matchOrDie(Type.END, "End keyword expected")
+        matchOrDie(Type.END)
     }
 
     fun statementList() {
@@ -38,23 +38,35 @@ class SimpleLangParser(val lex: SimpleLangLexer) {
                 `while`()
             Type.FOR ->
                 `for`()
+            Type.IF ->
+                `if`()
             else -> syntaxError("Operator expected")
         }
+    }
+
+    fun `if`() {
+        matchOrDie(Type.IF)
+        expression()
+        matchOrDie(Type.THEN)
+        statement()
+
+        if (skip(Type.ELSE))
+            statement()
     }
 
     fun `while`() {
         matchOrDie(Type.WHILE)
         expression()
-        matchOrDie(Type.DO, "DO expected")
+        matchOrDie(Type.DO)
         statement()
     }
 
     fun `for`() {
         matchOrDie(Type.FOR)
         assign()
-        matchOrDie(Type.TO, "TO expected")
+        matchOrDie(Type.TO)
         expression()
-        matchOrDie(Type.DO, "DO DO DO")
+        matchOrDie(Type.DO)
         statement()
     }
 
@@ -87,7 +99,7 @@ class SimpleLangParser(val lex: SimpleLangLexer) {
         return false
     }
 
-    fun matchOrDie(type: Type, errMsg: String = "ERROR"): Boolean {
+    fun matchOrDie(type: Type, errMsg: String = "$type keyword expected"): Boolean {
         if (current.type != type) {
             syntaxError(errMsg)
             return false

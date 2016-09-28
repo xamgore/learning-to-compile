@@ -6,9 +6,13 @@ begin
     c := 234
   end;
 
-  for a := 1 to 5 do
-    while 1 do
-      begin
-        test := 2
-      end
+  if true then
+    for a := 1 to 5 do
+      while 1 do
+        begin
+          if false then
+            test := 2
+        end
+  else
+    test := 0
 end
