@@ -7,11 +7,11 @@ begin
   end;
 
   if true then
-    for a := 1 to 5 do
-      while 1 do
+    for a := 1-1 to 5*5 do
+      while 1+1 - a do
         begin
           if false then
-            test := 2
+            test := 2 + 3 * 4 - 12 / 48
         end
   else
     test := 0

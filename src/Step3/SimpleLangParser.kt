@@ -83,8 +83,29 @@ class SimpleLangParser(val lex: SimpleLangLexer) {
     }
 
     fun expression() {
-        if (skip(Type.ID) || skip(Type.INT))
-            return
+        binaryAdd()
+    }
+
+    fun binaryAdd() {
+        binaryMult()
+        while (skip(Type.PLUS) || skip(Type.MINUS))
+            binaryMult()
+    }
+
+    fun binaryMult() {
+        operand()
+        while (skip(Type.PRODUCT) || skip(Type.DIVISION))
+            operand()
+    }
+
+    fun operand() {
+        if (skip(Type.LBRACKET)) {
+            expression()
+            matchOrDie(Type.RBRACKET)
+        } else {
+            if (skip(Type.ID) || skip(Type.INT))
+                return
+        }
 
         syntaxError("Expression expected")
     }

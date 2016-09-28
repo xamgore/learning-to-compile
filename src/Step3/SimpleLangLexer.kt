@@ -7,6 +7,7 @@ import java.nio.file.Paths
 
 enum class Type {
     EOF, ID, INT, COLON, SEMICOLON, ASSIGN, BEGIN, END, CYCLE,
+    LBRACKET, RBRACKET, PLUS, MINUS, PRODUCT, DIVISION,
     WHILE, FOR, DO, TO, IF, THEN, ELSE
 }
 
@@ -77,6 +78,36 @@ class SimpleLangLexer(val fileName: String) {
         tokenPos = Pair(row, col)
 
         when (ch) {
+            '(' -> {
+                ch = nextChar()
+                return Token(Type.LBRACKET)
+            }
+
+            ')' -> {
+                ch = nextChar()
+                return Token(Type.RBRACKET)
+            }
+
+            '+' -> {
+                ch = nextChar()
+                return Token(Type.PLUS)
+            }
+
+            '-' -> {
+                ch = nextChar()
+                return Token(Type.MINUS)
+            }
+
+            '*' -> {
+                ch = nextChar()
+                return Token(Type.PRODUCT)
+            }
+
+            '/' -> {
+                ch = nextChar()
+                return Token(Type.DIVISION)
+            }
+
             ';' -> {
                 ch = nextChar()
                 return Token(Type.SEMICOLON)
