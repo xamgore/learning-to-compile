@@ -6,6 +6,9 @@ begin
   
   // THIS IS A COMMENT, DUDE!
   s := 'string';
+  {
+	a b
+  }
 
   begin
     bek := a;
