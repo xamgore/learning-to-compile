@@ -1,3 +1,14 @@
-begin ggg : ; :+= 7 99.9 5 
-1 
-ppp end
+begin
+  a := 2;
+  e := 4;
+
+  cycle a
+  
+  // THIS IS A COMMENT, DUDE!
+  s := 'string';
+
+  begin
+    bek := a;
+    coq := 234.4
+  end
+end
