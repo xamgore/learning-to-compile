@@ -1,5 +1,7 @@
 ## Auto generated files
-/src/Step3/SimpleLex.cs
+SimpleLex.cs
+SimpleYacc.cs
+SimpleYacc.lst
 
 .DS_Store
 .idea/shelf
