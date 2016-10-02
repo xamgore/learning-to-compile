@@ -7,7 +7,7 @@
 
 %namespace SimpleParser
 
-%token BEGIN END CYCLE INUM RNUM ID ASSIGN SEMICOLON WHILE DO REPEAT UNTIL FOR TO
+%token BEGIN END CYCLE INUM RNUM ID ASSIGN SEMICOLON WHILE DO REPEAT UNTIL FOR TO WRITE RBRACKET LBRACKET
 
 %%
 
@@ -24,6 +24,7 @@ statement: assign
 		| while
 		| repeat
         | for
+        | write
 		;
 
 ident 	: ID 
@@ -46,6 +47,9 @@ repeat  : REPEAT stlist UNTIL expr
 		;
 
 for     : FOR assign TO expr DO statement
+        ;
+        
+write   : WRITE LBRACKET expr RBRACKET
         ;
 
 cycle	: CYCLE expr statement 
