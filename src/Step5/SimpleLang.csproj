@@ -50,6 +50,13 @@
     <Compile Include="SimpleLex.cs" />
     <Compile Include="SimpleYacc.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleLex.lex" />
+    <None Include="SimpleYacc.y" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="a.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

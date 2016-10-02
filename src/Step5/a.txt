@@ -3,6 +3,8 @@ begin
   a := 3;
   a := b;
   cycle 3
+
+  while 2 do
   begin
     a := c;
     c := 1
