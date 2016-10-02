@@ -13,5 +13,7 @@ begin
   repeat
     a := 1;
     b := c
-  until 2
+  until 2;
+
+  for i := 1 to 5 do a := i
 end
