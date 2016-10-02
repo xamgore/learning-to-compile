@@ -15,7 +15,9 @@ begin
     b := c
   until 2;
 
-  write(5);
+  if 1 then write(5);
+
+  if 0 then write(4) else write(2);
 
   for i := 1 to 5 do a := i
 end
