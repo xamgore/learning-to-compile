@@ -32,6 +32,11 @@ ID {Alpha}{AlphaDigit}*
 ")"  { return (int)Tokens.RBRACKET; }
 ","  { return (int)Tokens.COMMA; }
 
+"+"  { return (int)Tokens.PLUS; }
+"-"  { return (int)Tokens.MINUS; }
+"*"  { return (int)Tokens.PRODUCT; }
+"/"  { return (int)Tokens.DIVISION; }
+
 [^ \r\n] {
 	LexError();
 	return (int)Tokens.EOF; // конец разбора
