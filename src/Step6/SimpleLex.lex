@@ -68,6 +68,8 @@ class ScannerHelper
     keywords.Add("cycle",(int)Tokens.CYCLE);
     keywords.Add("while",(int)Tokens.WHILE);
     keywords.Add("do",(int)Tokens.DO);
+    keywords.Add("repeat",(int)Tokens.REPEAT);
+    keywords.Add("until",(int)Tokens.UNTIL);
   }
   public static int GetIDToken(string s)
   {
