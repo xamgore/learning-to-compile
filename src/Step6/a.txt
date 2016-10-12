@@ -16,5 +16,7 @@ begin
   until true;
 
   for i := 1 to 3 do
-    a := 4
+    a := 4;
+
+  write(hi)
 end

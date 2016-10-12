@@ -71,6 +71,13 @@ namespace ProgramTree {
         }
     }
 
+    public class WriteNode : StatementNode {
+        public ExprNode Expr { get; set; }
+        public WriteNode(ExprNode e) {
+            Expr = e;
+        }
+    }
+
     public class BlockNode : StatementNode {
         public List<StatementNode> StList = new List<StatementNode>();
         public BlockNode(StatementNode stat) {
