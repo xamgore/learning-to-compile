@@ -60,6 +60,17 @@ namespace ProgramTree {
         }
     }
 
+    public class ForNode : StatementNode {
+        public AssignNode Ass { get; set; }
+        public ExprNode Expr { get; set; }
+        public StatementNode Stat { get; set; }
+        public ForNode(AssignNode a, ExprNode e, StatementNode s) {
+            Ass = a;
+            Expr = e;
+            Stat = s;
+        }
+    }
+
     public class BlockNode : StatementNode {
         public List<StatementNode> StList = new List<StatementNode>();
         public BlockNode(StatementNode stat) {

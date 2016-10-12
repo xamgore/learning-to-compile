@@ -20,13 +20,13 @@
 
 %namespace SimpleParser
 
-%token BEGIN END CYCLE ASSIGN SEMICOLON DO WHILE REPEAT UNTIL
+%token BEGIN END CYCLE ASSIGN SEMICOLON DO WHILE REPEAT UNTIL FOR TO
 %token <iVal> INUM 
 %token <dVal> RNUM 
 %token <sVal> ID
 
 %type <eVal> expr ident 
-%type <stVal> assign statement cycle while repeat
+%type <stVal> assign statement cycle while repeat for
 %type <blVal> stlist block
 
 %%
@@ -50,6 +50,7 @@ statement: assign { $$ = $1; }
 		| cycle   { $$ = $1; }
         | while   { $$ = $1; }
         | repeat  { $$ = $1; }
+        | for     { $$ = $1; }
 	;
 
 ident 	: ID { $$ = new IdNode($1); }	
@@ -72,6 +73,9 @@ while   : WHILE expr DO statement { $$ = new WhileNode($2, $4); }
         ;
 
 repeat  : REPEAT stlist UNTIL expr { $$ = new RepeatNode($4, $2); }
+        ;
+
+for     : FOR assign TO expr DO statement { $$ = new ForNode($2 as AssignNode, $4, $6); }
         ;
 	
 %%

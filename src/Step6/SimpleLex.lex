@@ -70,6 +70,8 @@ class ScannerHelper
     keywords.Add("do",(int)Tokens.DO);
     keywords.Add("repeat",(int)Tokens.REPEAT);
     keywords.Add("until",(int)Tokens.UNTIL);
+    keywords.Add("for",(int)Tokens.FOR);
+    keywords.Add("to",(int)Tokens.TO);
   }
   public static int GetIDToken(string s)
   {

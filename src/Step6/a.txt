@@ -15,5 +15,6 @@ begin
     a := c
   until true;
 
-  a := 4
+  for i := 1 to 3 do
+    a := 4
 end
